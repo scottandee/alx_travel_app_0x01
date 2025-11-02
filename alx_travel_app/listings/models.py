@@ -65,6 +65,12 @@ class Booking(models.Model):
         default=BookingStatus.PENDING)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        if self.start_date and self.end_date and self.listing:
+            days = (self.end_date - self.start_date).days
+            self.total_price = self.listing.price_per_night * days
+        return super().save(*args, **kwargs)
+
 
 class Review(models.Model):
     review_id = models.UUIDField(

@@ -34,7 +34,7 @@ class BookingSerializer(serializers.ModelSerializer):
             'status',
             'created_at'
         ]
-        read_only_fields = ['booking_id', 'created_at']
+        read_only_fields = ['booking_id', 'total_price', 'created_at']
 
 
 class ListingSerializer(serializers.ModelSerializer):
