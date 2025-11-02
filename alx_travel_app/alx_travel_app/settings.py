@@ -1,6 +1,7 @@
 from pathlib import Path
 import environ
 import os
+from datetime import timedelta
 
 env = environ.Env()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'django_seed',
+    'rest_framework_simplejwt',
 
     # Local apps
     'listings.apps.ListingsConfig'
@@ -85,11 +87,16 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
     ],
 }
 
+SIMPLE_JWT = {
+    "USER_ID_FIELD": "user_id",
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
