@@ -18,33 +18,34 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BookingSerializer(serializers.ModelSerializer):
-    listing_id = serializers.PrimaryKeyRelatedField(read_only=True)
-    user_id = serializers.PrimaryKeyRelatedField(read_only=True)
+    listing = serializers.PrimaryKeyRelatedField(
+        queryset=Listing.objects.all())
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Booking
         fields = [
             'booking_id',
-            'listing_id',
-            'user_id',
+            'listing',
+            'user',
             'start_date',
             'end_date',
             'total_price',
             'status',
             'created_at'
         ]
-        read_only_fields = ['listing_id', 'created_at']
+        read_only_fields = ['booking_id', 'created_at']
 
 
 class ListingSerializer(serializers.ModelSerializer):
-    host_id = serializers.PrimaryKeyRelatedField(read_only=True)
+    host = serializers.PrimaryKeyRelatedField(read_only=True)
     bookings = BookingSerializer(many=True, read_only=True)
 
     class Meta:
         model = Listing
         fields = [
             'listing_id',
-            'host_id',
+            'host',
             'name',
             'description',
             'location',
