@@ -8,7 +8,7 @@ from .permissions import IsGuestForBooking, IsHostForListing
 class ListingViewSets(viewsets.ModelViewSet):
     serializer_class = ListingSerializer
     queryset = Listing.objects.all()
-    permission_classes = [IsHostForListing]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsHostForListing]
 
     def perform_create(self, serializer):
         """
