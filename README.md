@@ -70,9 +70,13 @@ This repository contains the initial setup for the **ALX Travel App**, a real-wo
     python manage.py makemigrations
     python manage.py migrate
     ```
-6. Run the development server
+6. Create a user
+    ```bash
+    python manage.py createsuperuser
+    ```
+7. Run the development server
     ```bash
     python manage.py runserver
     ```
-7. Access Swagger documentation
+8. Access Swagger documentation
 - Navigate to: http://127.0.0.1:8000/api/swagger/
